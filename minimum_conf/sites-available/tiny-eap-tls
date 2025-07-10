@@ -1,0 +1,20 @@
+server eap-tls {
+    listen {
+	    type = auth
+	    ipaddr = *
+	    limit {
+	          max_connections = 8
+	          lifetime = 0
+	          idle_timeout = 15
+	    }
+    }
+
+    authorize {
+	    eap {
+	    }
+    }
+
+    authenticate {
+	    eap
+    }
+}

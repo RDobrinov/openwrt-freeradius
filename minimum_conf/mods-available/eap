@@ -1,0 +1,45 @@
+# -*- text -*-
+##
+##  eap.conf -- Configuration for EAP types (PEAP, TTLS, etc.)
+##
+##	$Id$
+
+eap {
+	default_eap_type = tls
+	timer_expire = 60
+	ignore_unknown_eap_types = no
+	cisco_accounting_username_bug = no
+	max_sessions = ${max_requests}
+
+	tls-config tls-common {
+		private_key_password = 
+
+		# Server private key
+		private_key_file = /etc/freeradius3/certs/radius.private.network.key
+
+		#Server certificate
+		certificate_file = /etc/freeradius3/certs/radius.private.network.crt
+
+		# Root CA Certificate file
+		ca_file = /etc/freeradius3/certs/FreeRadius_CA.crt
+
+		ca_path = ${cadir}
+
+        random_file = /dev/urandom
+
+		cipher_list = "DEFAULT"
+		cipher_server_preference = no
+
+		tls_min_version = "1.2"
+		tls_max_version = "1.2"
+
+		ecdh_curve = ""
+
+		verify {
+		}
+	}
+
+	tls {
+		tls = tls-common
+	}
+}
